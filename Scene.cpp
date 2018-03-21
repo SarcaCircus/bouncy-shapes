@@ -61,32 +61,47 @@ void Scene::Update(double deltaTime)
     //moveGreenSquare(deltaTime);
 	auto thun4 = *_gameObjects.at(6);
 	MPoint2F star = thun4.getLocation();
-	if (star.y == 486 || star.y==0) {
-		wall == true;
-		if (star.y == 486) {
-			while (star.y <= 486 && star.y > 0) {
-				thun4._location = { star.x,star.y * (float)deltaTime / 17 };
-				*_gameObjects.at(6) = thun4;
-			}
-			wall == false;
-		}
-		else if (star.y == 0) {
-			while (star.y >= 0 && star.y < 486) {
-				thun4._location = { star.x,star.y / (float)deltaTime * 17 };
-				*_gameObjects.at(6) = thun4;
-			}
-			wall == false;
-		}
-		//thun4._location = { star.x,star.y / (float)deltaTime /17 };
-		//wall == false;
-		//*_gameObjects.at(6) = thun4;
-	 
-	}
-	//else if ((star.y ==10 &&wall==true)||wall ==false) {
-	//	if (wall == true)wall = false;
+	//if (star.y == 486 || star.y==0) {
+	//	wall == true;
+	//	if (star.y == 486) {
+	//		while (star.y <= 486 && star.y > 0) {
+	//			thun4._location = { star.x,star.y * (float)deltaTime / 17 };
+	//			*_gameObjects.at(6) = thun4;
+	//		}
+	//		wall == false;
+	//	}
+	//	else if (star.y == 0) {
+	//		while (star.y >= 0 && star.y < 486) {
+	//			thun4._location = { star.x,star.y / (float)deltaTime * 17 };
+	//			*_gameObjects.at(6) = thun4;
+	//		}
+	//		wall == false;
+	//	}
+	//	//thun4._location = { star.x,star.y / (float)deltaTime /17 };
+	//	//wall == false;
+	//	//*_gameObjects.at(6) = thun4;
+	// 
+	//}
+	////else if ((star.y ==10 &&wall==true)||wall ==false) {
+	////	if (wall == true)wall = false;
 		thun4._location = { star.x,star.y / (float)deltaTime*17  };
 		*_gameObjects.at(6) = thun4;
+
+		auto thu2 = *_gameObjects.at(8);
+		MPoint2F why = thu2.getLocation();
+		thu2._location = { why.x / (float)deltaTime * 18,why.y / (float)deltaTime * 17 };
+		*_gameObjects.at(8) = thu2;
 		
+		auto thu = *_gameObjects.at(1);
+		MPoint2F sorry = thu.getLocation();
+		thu._location = { sorry.x / (float)deltaTime * 20,sorry.y / (float)deltaTime * 20 };
+		*_gameObjects.at(1) = thu;
+
+		auto tu = *_gameObjects.at(0);
+		MPoint2F sor = tu.getLocation();
+		tu._location = { sor.x / (float)deltaTime * 18,sor.y };
+		*_gameObjects.at(0) = tu;
+
 	
 
 	auto thun5 = *_gameObjects.at(3);
@@ -106,4 +121,3 @@ void Scene::Draw(ID2D1HwndRenderTarget & target)
 		renderer.Render(target, object->getLocation());
 	}
 }
-
