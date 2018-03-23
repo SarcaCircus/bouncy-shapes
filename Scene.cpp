@@ -6,23 +6,176 @@
 #include "GameObject.h"
 #include <d2d1.h>
 
+using namespace std;
 
-class SquareMoves {
-
+class Movement {
 public:
-	void moveGreenSquare( double deltaTime) {
+	Movement(string type, GameObject toMove)
+		: _type(type), _toMove(toMove){}
 	
-			auto thun3 = _gameObjects;
-			MPoint2F start = thun3.getLocation();
-			thun3._location = { start.x / (float)deltaTime * 17,start.y };
-			_gameObjects=thun3;
-		
+	auto move(double deltaTime) {
+		auto thun3 = _toMove;
+		MPoint2F start = thun3.getLocation();
+		thun3._location = { start.x / (float)deltaTime * 17,start.y };
+		_toMove = thun3;
+		return _toMove;
 	}
-private:
-	GameObject _gameObjects;
-	double deltaTime;
+protected:
+	string _type;
+	GameObject _toMove;
 
 };
+class GreenSquare : public Movement{
+
+public:
+	GreenSquare(string type, GameObject toMove)
+		:Movement(type,toMove){}
+
+	GameObject move( double deltaTime) {
+		auto thun3 = _toMove;
+		MPoint2F start = thun3.getLocation();
+		thun3._location = { start.x / (float)deltaTime * 17,start.y };
+		_toMove = thun3;
+		return _toMove;
+	}
+
+};
+class PurpleSquare : public Movement {
+
+public:
+	PurpleSquare(string type, GameObject toMove)
+		:Movement(type, toMove) {}
+
+	GameObject move(double deltaTime) {
+		auto thon3 = _toMove;//purple square 7
+		MPoint2F art = thon3.getLocation();
+		thon3._location = { art.x /(float)deltaTime*15,art.y / (float)deltaTime * 15 };
+		_toMove = thon3;
+		return _toMove;
+	}
+
+};
+class GreenCircle : public Movement {
+
+public:
+	GreenCircle(string type, GameObject toMove)
+		:Movement(type, toMove) {}
+
+	GameObject move(double deltaTime) {
+		auto redun = _toMove;//green circle 4
+		MPoint2F at = redun.getLocation();
+		redun._location = { at.x / (float)deltaTime * 20,at.y / (float)deltaTime *15};
+		_toMove = redun;
+		return _toMove;
+	}
+
+};
+class PurpleSquare2: public Movement {
+
+public:
+	PurpleSquare2(string type, GameObject toMove)
+		:Movement(type, toMove) {}
+
+	GameObject move(double deltaTime) {
+		auto reduin = _toMove;//purple square
+		MPoint2F mat = reduin.getLocation();
+		reduin._location = { mat.x / (float)deltaTime * 20,mat.y / (float)deltaTime * 15 };
+		_toMove = reduin;
+		return _toMove;
+	}
+
+};
+class GreenCircle2 : public Movement {
+
+public:
+	GreenCircle2(string type, GameObject toMove)
+		:Movement(type, toMove) {}
+
+	GameObject move(double deltaTime) {
+		auto thun1 = _toMove;//green circle
+		MPoint2F stt = thun1.getLocation();
+		thun1._location = { stt.x ,stt.y / (float)deltaTime * 15 };
+		_toMove = thun1;
+		return _toMove;
+	}
+
+};
+class BlueSquare: public Movement {
+
+public:
+	BlueSquare(string type, GameObject toMove)
+		:Movement(type, toMove) {}
+
+	GameObject move(double deltaTime) {
+		auto thun4 = _toMove;
+		MPoint2F star = thun4.getLocation();
+		thun4._location = { star.x,star.y / (float)deltaTime*17  };//blue square
+		_toMove = thun4;
+		return _toMove;
+	}
+
+};
+class PurpleSquare3 : public Movement {
+
+public:
+	PurpleSquare3(string type, GameObject toMove)
+		:Movement(type, toMove) {}
+
+	GameObject move(double deltaTime) {
+		auto thu2 = _toMove;//purple square 8
+		MPoint2F why = thu2.getLocation();
+		thu2._location = { why.x / (float)deltaTime * 18,why.y / (float)deltaTime * 17 };
+		_toMove = thu2;
+		return _toMove;
+	}
+
+};
+class RedCircle : public Movement {
+
+public:
+	RedCircle(string type, GameObject toMove)
+		:Movement(type, toMove) {}
+
+	GameObject move(double deltaTime) {
+		auto thu = _toMove;//red circle 1
+		MPoint2F sorry = thu.getLocation();
+		thu._location = { sorry.x / (float)deltaTime * 20,sorry.y / (float)deltaTime * 20 };
+		_toMove = thu;
+		return _toMove;
+	}
+
+};
+class BlueCircle : public Movement {
+
+public:
+	BlueCircle(string type, GameObject toMove)
+		:Movement(type, toMove) {}
+
+	GameObject move(double deltaTime) {
+		auto tu = _toMove;//blue circle 0
+		MPoint2F sor = tu.getLocation();
+		tu._location = { sor.x / (float)deltaTime * 18,sor.y };
+		_toMove = tu;
+		return _toMove;
+	}
+
+};
+class PurpleCircle : public Movement {
+
+public:
+	PurpleCircle(string type, GameObject toMove)
+		:Movement(type, toMove) {}
+
+	GameObject move(double deltaTime) {
+		auto thun5 = _toMove;//purple circle 3
+		MPoint2F tar = thun5.getLocation();
+		thun5._location = { tar.x / (float)deltaTime * 18,tar.y / (float)deltaTime * 17 };
+		_toMove = thun5;
+		return _toMove;
+	}
+
+};
+
 
 
 void Scene::insertGameObject(std::unique_ptr<GameObject>& object)
@@ -33,81 +186,37 @@ void Scene::insertGameObject(std::unique_ptr<GameObject>& object)
 
 void Scene::Update(double deltaTime)
 {
-	
-	auto thon3 = *_gameObjects.at(7);
-	MPoint2F art = thon3.getLocation();
-	thon3._location = { art.x /(float)deltaTime*15,art.y / (float)deltaTime * 15 };
-	*_gameObjects.at(7) = thon3;
-	
-	auto redun = *_gameObjects.at(4);
-	MPoint2F at = redun.getLocation();
-	redun._location = { at.x / (float)deltaTime * 20,at.y / (float)deltaTime *15};
-	*_gameObjects.at(4) = redun;
+	auto gs = *_gameObjects.at(5);
+	GreenSquare a{"green", gs };
+	*_gameObjects.at(5) = a.move(deltaTime);
+	auto ps = *_gameObjects.at(7);
+	PurpleSquare b{ "purple", ps };
+	*_gameObjects.at(7) = b.move(deltaTime);
+	auto gc = *_gameObjects.at(4);
+	GreenCircle c{ "green", gc };
+	*_gameObjects.at(4) = c.move(deltaTime);
+	auto ps2 = *_gameObjects.at(9);
+	PurpleSquare2 d{ "purple", ps2 };
+	*_gameObjects.at(9) = d.move(deltaTime);
+	auto gc2 = *_gameObjects.at(2);
+	GreenCircle2 e{ "green", gc2 };
+	*_gameObjects.at(2) = e.move(deltaTime);
+	auto bs = *_gameObjects.at(6);
+	GreenCircle2 f{ "blue", bs };
+	*_gameObjects.at(6) = f.move(deltaTime);
+	auto ps3 = *_gameObjects.at(8);
+	PurpleSquare3 g{ "purple", ps3 };
+	*_gameObjects.at(8) = g.move(deltaTime);
+	auto rc = *_gameObjects.at(1);
+	RedCircle h{ "red", rc };
+	*_gameObjects.at(1) = h.move(deltaTime);
+	auto bc = *_gameObjects.at(0);
+	BlueCircle i{ "blue", bc };
+	*_gameObjects.at(0) = i.move(deltaTime);
+	auto pc = *_gameObjects.at(3);
+	PurpleCircle j{ "purple", pc };
+	*_gameObjects.at(3) = j.move(deltaTime);
 
-	auto reduin = *_gameObjects.at(9);
-	MPoint2F mat = reduin.getLocation();
-	reduin._location = { mat.x / (float)deltaTime * 20,mat.y / (float)deltaTime * 15 };
-	*_gameObjects.at(9) = reduin;
-	
-	auto thun1 = *_gameObjects.at(2);
-	MPoint2F stt = thun1.getLocation();
-	thun1._location = { stt.x ,stt.y / (float)deltaTime * 15 };
-	*_gameObjects.at(1) = thun1;
-	
-	auto thun3 = *_gameObjects.at(5);
-	MPoint2F sart = thun3.getLocation();
-	thun3._location = { sart.x / (float)deltaTime * 17,sart.y };
-	*_gameObjects.at(5) = thun3;
-    //moveGreenSquare(deltaTime);
-	auto thun4 = *_gameObjects.at(6);
-	MPoint2F star = thun4.getLocation();
-	//if (star.y == 486 || star.y==0) {
-	//	wall == true;
-	//	if (star.y == 486) {
-	//		while (star.y <= 486 && star.y > 0) {
-	//			thun4._location = { star.x,star.y * (float)deltaTime / 17 };
-	//			*_gameObjects.at(6) = thun4;
-	//		}
-	//		wall == false;
-	//	}
-	//	else if (star.y == 0) {
-	//		while (star.y >= 0 && star.y < 486) {
-	//			thun4._location = { star.x,star.y / (float)deltaTime * 17 };
-	//			*_gameObjects.at(6) = thun4;
-	//		}
-	//		wall == false;
-	//	}
-	//	//thun4._location = { star.x,star.y / (float)deltaTime /17 };
-	//	//wall == false;
-	//	//*_gameObjects.at(6) = thun4;
-	// 
-	//}
-	////else if ((star.y ==10 &&wall==true)||wall ==false) {
-	////	if (wall == true)wall = false;
-		thun4._location = { star.x,star.y / (float)deltaTime*17  };
-		*_gameObjects.at(6) = thun4;
-
-		auto thu2 = *_gameObjects.at(8);
-		MPoint2F why = thu2.getLocation();
-		thu2._location = { why.x / (float)deltaTime * 18,why.y / (float)deltaTime * 17 };
-		*_gameObjects.at(8) = thu2;
-		
-		auto thu = *_gameObjects.at(1);
-		MPoint2F sorry = thu.getLocation();
-		thu._location = { sorry.x / (float)deltaTime * 20,sorry.y / (float)deltaTime * 20 };
-		*_gameObjects.at(1) = thu;
-
-		auto tu = *_gameObjects.at(0);
-		MPoint2F sor = tu.getLocation();
-		tu._location = { sor.x / (float)deltaTime * 18,sor.y };
-		*_gameObjects.at(0) = tu;
-
-	
-
-	auto thun5 = *_gameObjects.at(3);
-	MPoint2F tar = thun5.getLocation();
-	thun5._location = { tar.x / (float)deltaTime * 18,tar.y / (float)deltaTime * 17 };
-	*_gameObjects.at(3) = thun5;
 
 	// TODO: update objects in the scene
 }
