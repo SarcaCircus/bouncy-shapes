@@ -47,11 +47,27 @@ public:
 		:Movement(type, toMove) {}
 
 	GameObject move(double deltaTime) {
-		auto thon3 = _toMove;//purple square 7
-		MPoint2F art = thon3.getLocation();
-		thon3._location = { art.x /(float)deltaTime*15,art.y / (float)deltaTime * 15 };
-		_toMove = thon3;
-		return _toMove;
+		if (_type == "one") {
+			auto thon3 = _toMove;//purple square 7
+			MPoint2F art = thon3.getLocation();
+			thon3._location = { art.x / (float)deltaTime * 15,art.y / (float)deltaTime * 15 };
+			_toMove = thon3;
+			return _toMove;
+		}
+		else if (_type == "two") {
+			auto reduin = _toMove;//purple square
+			MPoint2F mat = reduin.getLocation();
+			reduin._location = { mat.x / (float)deltaTime * 20,mat.y / (float)deltaTime * 15 };
+			_toMove = reduin;
+			return _toMove;
+		}
+		else if (_type == "three") {
+			auto thu2 = _toMove;//purple square 8
+			MPoint2F why = thu2.getLocation();
+			thu2._location = { why.x / (float)deltaTime * 18,why.y / (float)deltaTime * 17 };
+			_toMove = thu2;
+			return _toMove;
+		}
 	}
 
 };
@@ -62,44 +78,24 @@ public:
 		:Movement(type, toMove) {}
 
 	GameObject move(double deltaTime) {
-		auto redun = _toMove;//green circle 4
-		MPoint2F at = redun.getLocation();
-		redun._location = { at.x / (float)deltaTime * 20,at.y / (float)deltaTime *15};
-		_toMove = redun;
-		return _toMove;
+		if (_type == "one") {
+			auto redun = _toMove;//green circle 4
+			MPoint2F at = redun.getLocation();
+			redun._location = { at.x / (float)deltaTime * 20,at.y / (float)deltaTime * 15 };
+			_toMove = redun;
+			return _toMove;
+		}
+		else if (_type == "two") {
+			auto thun1 = _toMove;//green circle
+			MPoint2F stt = thun1.getLocation();
+			thun1._location = { stt.x ,stt.y / (float)deltaTime * 15 };
+			_toMove = thun1;
+			return _toMove;
+		}
 	}
 
 };
-class PurpleSquare2: public Movement {
 
-public:
-	PurpleSquare2(string type, GameObject toMove)
-		:Movement(type, toMove) {}
-
-	GameObject move(double deltaTime) {
-		auto reduin = _toMove;//purple square
-		MPoint2F mat = reduin.getLocation();
-		reduin._location = { mat.x / (float)deltaTime * 20,mat.y / (float)deltaTime * 15 };
-		_toMove = reduin;
-		return _toMove;
-	}
-
-};
-class GreenCircle2 : public Movement {
-
-public:
-	GreenCircle2(string type, GameObject toMove)
-		:Movement(type, toMove) {}
-
-	GameObject move(double deltaTime) {
-		auto thun1 = _toMove;//green circle
-		MPoint2F stt = thun1.getLocation();
-		thun1._location = { stt.x ,stt.y / (float)deltaTime * 15 };
-		_toMove = thun1;
-		return _toMove;
-	}
-
-};
 class BlueSquare: public Movement {
 
 public:
@@ -115,21 +111,7 @@ public:
 	}
 
 };
-class PurpleSquare3 : public Movement {
 
-public:
-	PurpleSquare3(string type, GameObject toMove)
-		:Movement(type, toMove) {}
-
-	GameObject move(double deltaTime) {
-		auto thu2 = _toMove;//purple square 8
-		MPoint2F why = thu2.getLocation();
-		thu2._location = { why.x / (float)deltaTime * 18,why.y / (float)deltaTime * 17 };
-		_toMove = thu2;
-		return _toMove;
-	}
-
-};
 class RedCircle : public Movement {
 
 public:
@@ -190,22 +172,22 @@ void Scene::Update(double deltaTime)
 	GreenSquare a{"green", gs };
 	*_gameObjects.at(5) = a.move(deltaTime);
 	auto ps = *_gameObjects.at(7);
-	PurpleSquare b{ "purple", ps };
+	PurpleSquare b{ "one", ps };
 	*_gameObjects.at(7) = b.move(deltaTime);
 	auto gc = *_gameObjects.at(4);
-	GreenCircle c{ "green", gc };
+	GreenCircle c{ "one", gc };
 	*_gameObjects.at(4) = c.move(deltaTime);
 	auto ps2 = *_gameObjects.at(9);
-	PurpleSquare2 d{ "purple", ps2 };
+	PurpleSquare d{ "two", ps2 };
 	*_gameObjects.at(9) = d.move(deltaTime);
 	auto gc2 = *_gameObjects.at(2);
-	GreenCircle2 e{ "green", gc2 };
+	GreenCircle e{ "two", gc2 };
 	*_gameObjects.at(2) = e.move(deltaTime);
 	auto bs = *_gameObjects.at(6);
-	GreenCircle2 f{ "blue", bs };
+	BlueSquare f{ "blue", bs };
 	*_gameObjects.at(6) = f.move(deltaTime);
 	auto ps3 = *_gameObjects.at(8);
-	PurpleSquare3 g{ "purple", ps3 };
+	PurpleSquare g{ "three", ps3 };
 	*_gameObjects.at(8) = g.move(deltaTime);
 	auto rc = *_gameObjects.at(1);
 	RedCircle h{ "red", rc };
